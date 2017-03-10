@@ -25,7 +25,7 @@ def login():
 		valid = False
 		if len(req_user) == 1 and len(req_pass) == 1:
 			if str(req_user[0][0]) == request.form['username']:
-				if str(req_pass[0][0]) == request.form['password']:
+				if str(req_pass[0][0]) == hashed_pass:
 					valid = True
 					
 		if valid == True:
