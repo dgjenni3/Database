@@ -89,10 +89,10 @@ def delete():
 		req_song = db.engine.execute(sql_str).fetchall()
 		if len(req_song) == 0:
 			error = True
-			return render_template("delete.html", username=session['CURR_USER'], logged_in=session['LOGGED_IN'], error=True)
+			return render_template("delete.html", username=session['CURR_USER'], logged_in=session['LOGGED_IN'], error='True')
 		
 		sql_str = "DELETE FROM Song WHERE Song_Url='" + request.form['song_url'] + "';"
 		del_song = db.engine.execute(sql_str)
-		return render_template("delete.html", username=session['CURR_USER'], logged_in=session['LOGGED_IN'], error=False)
-	return render_template("delete.html", username=session['CURR_USER'], logged_in=session['LOGGED_IN'], error=None)
+		return render_template("delete.html", username=session['CURR_USER'], logged_in=session['LOGGED_IN'], error='False')
+	return render_template("delete.html", username=session['CURR_USER'], logged_in=session['LOGGED_IN'])
 	

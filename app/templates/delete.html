@@ -10,9 +10,9 @@
 	<div>
 	{% if not error %}
 	<h5>Enter the URL of the song you want to delete in the field above.</h5>
-	{% elif error == True %}
+	{% elif error == 'True' %}
 	<h5>Error - There is no song corresponding to that URL!</h5>
-	{% elif error == False %}
+	{% elif error == 'False' %}
 	<h5>Song deleted successfully!</h5>
 	{% endif %}
 	</div>
