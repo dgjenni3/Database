@@ -36,6 +36,6 @@ def signup():
 	if request.method == 'POST':
 		sql_str = "INSERT INTO UserTable(Username, Password, Email, Artist_Url) VALUES ('" + request.form['username'] + "', '" + request.form['password'] + \
 		"', '" + request.form['email'] + "', '" + request.form['username'] + "');"
-		create_user = db.engine.execute(sql_str).fetchall()
+		create_user = db.engine.execute(sql_str)
 		return render_template("success.html", username=request.form['username'], logged_in=True)
 	return render_template("signup.html", error=error, logged_in=None)
