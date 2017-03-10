@@ -112,7 +112,8 @@ def edit_song():
 		genre = req_song[0][4]
 		track_type = req_song[0][5]
 		return render_template("edit.html", username=session['CURR_USER'], logged_in=session['LOGGED_IN'], song_title=song_title, song_url=song_url, genre=genre, track_type=track_type)
+		
 @app.route('/edit_song/<song_url>')
 def get_song_url(song_url = None):
 	session['SONG_URL'] = song_url
-	return request(url_for('/edit'))
+	return request(url_for('edit'))
