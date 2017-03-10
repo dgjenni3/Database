@@ -102,7 +102,7 @@ def song_edit(song_url):
 		sql_str = "UPDATE Song SET Title='" + request.form['title'] + "', " + "Genre='" + request.form['genre'] + \
 		"', Track_type='" + request.form['track_type'] + "' WHERE Song_Url='" + song_url + "';"
 		updated_song = db.engine.execute(sql_str)
-		return render_template("edit.html", error=False)
+		return render_template("edit.html", error='False')
 	elif request.method == 'GET':
 		sql_str = "SELECT * FROM Song WHERE Song_Url='" + song_url + "';"
 		req_song = db.engine.execute(sql_str).fetchall()
