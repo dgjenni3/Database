@@ -23,7 +23,7 @@ def login():
 		if valid == True:
 			os.environ['CURR_USER'] = request.form['username']
 			os.environ['LOGGED_IN'] = 'YES'
-			return redirect(url_for('/success'))
+			return redirect(url_for('success'))
 		else:
 			return render_template("login.html", error=True, logged_in=os.environ.get('LOGGED_IN'))
 				
@@ -41,7 +41,7 @@ def signup():
 		all_users = db.engine.execute(sql_str).fetchall()
 		os.environ['CURR_USER'] = request.form['username']
 		os.environ['LOGGED_IN'] = 'YES'
-		return redirect(url_for('/success'))
+		return redirect(url_for('success'))
 	return render_template("signup.html", error=error, logged_in=os.environ.get('LOGGED_IN'), username=os.environ.get('CURR_USER'))
 	
 @app.route('/success')
@@ -52,7 +52,7 @@ def success():
 def logout():
 	os.environ['CURR_USER'] = ''
 	os.environ['LOGGED_IN'] = 'NO'
-	return redirect(url_for('/'))
+	return redirect(url_for('index'))
 	
 @app.route('/upload', methods=['GET', 'POST'])
 def upload():
@@ -61,7 +61,7 @@ def upload():
 		"Soundcloud_Favorites) VALUES('" + request.form['title'] + "', 1234, 0, '" + request.form['song_url'] + \
 		"', '" + request.form['genre'] + "', '" + request.form['track_type'] + "', 8, 0);"
 		new_song = db.engine.execute(sql_str)
-		return redirect(url_for('/songs'))
+		return redirect(url_for('songs'))
 	return render_template("upload.html", username=os.environ.get('CURR_USER'), logged_in=os.environ['LOGGED_IN'])
 	
 @app.route('/songs')
