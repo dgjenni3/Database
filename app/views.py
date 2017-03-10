@@ -96,7 +96,7 @@ def delete():
 		return render_template("delete.html", username=session['CURR_USER'], logged_in=session['LOGGED_IN'], error='False')
 	return render_template("delete.html", username=session['CURR_USER'], logged_in=session['LOGGED_IN'])
 	
-@app.route('/edit/<song_url>', methods=['GET', 'POST'])
+@app.route('/edit/<path:song_url>', methods=['GET', 'POST'])
 def song_edit(song_url):
 	if request.method == 'POST':
 		sql_str = "UPDATE Song SET Title='" + request.form['title'] + "', " + "Genre='" + request.form['genre'] + \
