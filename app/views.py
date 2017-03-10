@@ -1,7 +1,7 @@
 from flask import render_template, request
 from app import app, db
 
-curr_user = ""
+curr_user = ''
 
 @app.route('/')
 @app.route('/index')
@@ -11,7 +11,7 @@ def index():
 	else:
 		logged_in = True
 		username = curr_user
-    return render_template("index.html", logged_in=logged_in, username=curr_user)
+    return render_template("index.html", logged_in=logged_in, username=username)
 	
 @app.route('/login', methods=['GET', 'POST'])
 def login():
