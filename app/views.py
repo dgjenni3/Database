@@ -83,6 +83,7 @@ def songs():
 	return render_template("songs.html", username=session['CURR_USER'], logged_in=session['LOGGED_IN'], song_list=all_songs)
 	
 @app.route('/delete', methods=['GET', 'POST'])
+def delete():
 	if request.method == 'POST':
 		error = False
 		sql_str = "SELECT Song_Url FROM Song WHERE Song_Url='" + request.form['song_url'] + "';"
