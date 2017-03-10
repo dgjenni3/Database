@@ -4,7 +4,7 @@
 	<h4>Click on a song to update its info</h4>
 	<div>
 	{% for songs in song_list %}
-	<a href="/edit/{{ songs[3] }}">{{ songs }}</a>
+	<a href="/edit_song/{{ songs[3] }}">{{ songs }}</a>
 	{% endfor %}
 	</div>
 	<a href="/upload">Upload A Song</a>
