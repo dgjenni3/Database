@@ -6,6 +6,8 @@ curr_user = ''
 @app.route('/')
 @app.route('/index')
 def index():
+	is_logged_in = False
+	curr_username = ''
 	if curr_user == '':
 		is_logged_in = False
 	else:
