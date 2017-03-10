@@ -4,3 +4,5 @@ Misc. Helpful Notes
 2. Environment variables ARE NOT SAVED across redirects
 3. To fix this problem, use the "session" object to store whatever you want in it.
 	Example: setting the current username across redirects: "session['CURR_USER'] = 'USERNAME GOES HERE'"
+
+4. url_for takes a FUNCTION NAME as a parameter (input as a string)
