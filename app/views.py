@@ -46,7 +46,7 @@ def signup():
 		sql_str = "SELECT * FROM UserTable;"
 		all_users = db.engine.execute(sql_str).fetchall()
 		curr_user = request.form['username']
-		return render_template("success.html", user_table=all_users, username=request.form['username'], logged_in=True)
+		return render_template("success.html", user_table=all_users, username=curr_user, logged_in=True)
 	return render_template("signup.html", error=error, logged_in=None, username=curr_username)
 	
 @app.route('/logout')
