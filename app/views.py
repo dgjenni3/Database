@@ -7,14 +7,14 @@ from app import app, db
 @app.route('/index')
 def index():
     username = 'TEST_USERNAME'
-    return render_template("index.html", logged_in=False, username=username)
+    return render_template("index.html", logged_in=None, username=username)
 	
 @app.route('/login', methods=['GET', 'POST'])
 def login():
 	if request.method == 'POST':
-		sql_str = "SELECT Username FROM User WHERE Username='" + request.form['username'] + "';"
+		sql_str = "SELECT Username FROM UserTable WHERE Username='" + request.form['username'] + "';"
 		req_user = db.engine.execute(sql_str).fetchall()
-		sql_str = "SELECT Password FROM User WHERE Password='" + request.form['password'] + "';"
+		sql_str = "SELECT Password FROM UserTable WHERE Password='" + request.form['password'] + "';"
 		req_pass = db.engine.execute(sql_str).fetchall()
 		valid = False
 		if len(req_user) == 1 and len(req_pass) == 1:
@@ -25,17 +25,17 @@ def login():
 		if valid == True:
 			return render_template("success.html", username=request.form['username'], logged_in=True)
 		else:
-			return render_template("login.html", error=True, logged_in=False)
+			return render_template("login.html", error=True, logged_in=None)
 				
 	# return the user login page on a GET request
-	return render_template("login.html", error=False)
+	return render_template("login.html", error=False, logged_in=None)
 	
 @app.route('/signup', methods=['GET', 'POST'])
 def signup():
 	error = False
 	if request.method == 'POST':
-		sql_str = "INSERT INTO User VALUES (" + request.form['username'] + ", " + request.form['password'] + \
+		sql_str = "INSERT INTO UserTable VALUES (" + request.form['username'] + ", " + request.form['password'] + \
 		", " + request.form['email'] + ", " + request.form['username'] + ");"
 		create_user = db.engine.execute(sql_str).fetchall()
 		return render_template("success.html", username=request.form['username'], logged_in=True)
-	return render_template("signup.html", error=error, logged_in=False)
+	return render_template("signup.html", error=error, logged_in=None)
