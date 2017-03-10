@@ -8,9 +8,6 @@ db = SQLAlchemy(app)
 
 app.secret_key = 'SUPER SECRET KEY'
 
-session['CURR_USER'] = ''
-session['LOGGED_IN'] = 'NO'
-
 
 # this code handles logging when running on heroku
 if not app.debug and os.environ.get('HEROKU') is None:

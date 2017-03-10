@@ -2,6 +2,13 @@ from flask import render_template, request, redirect, url_for, session
 from app import app, db
 import os
 
+@app.before_request
+def initSession():
+	if session.get('USERNAME') is None:
+		session['USERNAME'] = ''
+	if session.get('LOGGED_IN') is None:
+		session['LOGGED_IN'] = 'NO'
+
 @app.route('/')
 @app.route('/index')
 def index():
