@@ -3,7 +3,7 @@
     <h1>Edit Song</h1>
 	{% if not error %}
 	<div>
-	<form action="{{ url_for('edit') }}" method="post">
+	<form action="{{ url_for('song_edit', song_url=song_url) }}" method="post">
 	<p>Title:</p><input type="text" name="title" value="{{ song_title }}">
 	<p>Genre:</p><input type="text" name="genre" value="{{ genre }}">
 	<p>Song URL:</p><input type="text" name="song_url", value="{{ song_url }}" readonly="readonly">
