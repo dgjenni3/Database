@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% block content %}
+    <h1>Sign Up</h1>
+	<div>
+	<form action="{{ url_for('signup') }}" method="post">
+	<p>E-mail:</p> <input type="text" name="email">
+    <p>Username:</p> <input type="text" name="username">
+	<p>Password:</p> <input type="password" name="password">
+	<input type="submit" value="Sign Up">
+	</form>
+	<div>
+	<div>
+	{% if error %}
+	<h5>Error - that username already exists!</h5>
+	{% endif %}
+	</div>
+{% endblock %}

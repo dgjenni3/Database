@@ -7,7 +7,14 @@
     {% endif %}
   </head>
   <body>
-    <div>Microblog: <a href="/index">Home</a></div>
+    <div>On The Rise {% if logged_in %}(logged in as {{user.username}}){% endif %}
+	<a href="/index">Home</a>
+	{% if not logged_in %}
+	<a href="/login">Login</a>
+	{% else %}
+	<a href="/signup">Sign Up</a>
+	{% endif %}
+	</div>
     <hr>
     {% block content %}{% endblock %}
   </body>

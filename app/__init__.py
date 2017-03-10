@@ -8,6 +8,7 @@ db = SQLAlchemy(app)
 from app import views, models
 import os
 
+# this code handles logging when running on heroku
 if not app.debug and os.environ.get('HEROKU') is None:
     import logging
     from logging.handlers import RotatingFileHandler
