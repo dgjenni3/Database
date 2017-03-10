@@ -7,7 +7,7 @@ from app import app, db
 @app.route('/index')
 def index():
     username = 'TEST_USERNAME'
-    return render_template("index.html", logged_in=False, user=user)
+    return render_template("index.html", logged_in=False, username=username)
 	
 @app.route('/login', methods=['GET', 'POST'])
 def login():
