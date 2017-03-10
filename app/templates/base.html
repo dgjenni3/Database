@@ -1,9 +1,9 @@
 <html>
   <head>
-    {% if title %}
-    <title>{{ title }} - microblog</title>
+    {% if logged_in == 'YES' %}
+    <title>On The Rise (logged in as {{ username }})</title>
     {% else %}
-    <title>Welcome to microblog</title>
+    <title>On The Rise</title>
     {% endif %}
   </head>
   <body>

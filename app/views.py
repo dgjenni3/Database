@@ -1,11 +1,11 @@
-from flask import render_template, request, redirect, url_for
+from flask import render_template, request, redirect, url_for, session
 from app import app, db
 import os
 
 @app.route('/')
 @app.route('/index')
 def index():
-	return render_template("index.html", logged_in=os.environ.get('LOGGED_IN'), username=os.environ.get('CURR_USER'))
+	return render_template("index.html", logged_in=session['LOGGED_IN'], username=session['CURR_USER'])
 	
 @app.route('/login', methods=['GET', 'POST'])
 def login():
@@ -21,14 +21,14 @@ def login():
 					valid = True
 					
 		if valid == True:
-			os.environ['CURR_USER'] = request.form['username']
-			os.environ['LOGGED_IN'] = 'YES'
+			session['CURR_USER'] = request.form['username']
+			session['LOGGED_IN'] = 'YES'
 			return redirect(url_for('success'))
 		else:
-			return render_template("login.html", error=True, logged_in=os.environ.get('LOGGED_IN'))
+			return render_template("login.html", error=True, logged_in=session['LOGGED_IN'])
 				
 	# return the user login page on a GET request
-	return render_template("login.html", error=False, logged_in=os.environ.get('LOGGED_IN'))
+	return render_template("login.html", error=False, logged_in=session['LOGGED_IN'])
 	
 @app.route('/signup', methods=['GET', 'POST'])
 def signup():
@@ -42,16 +42,16 @@ def signup():
 		os.environ['CURR_USER'] = request.form['username']
 		os.environ['LOGGED_IN'] = 'YES'
 		return redirect(url_for('success'))
-	return render_template("signup.html", error=error, logged_in=os.environ.get('LOGGED_IN'), username=os.environ.get('CURR_USER'))
+	return render_template("signup.html", error=error, logged_in=session['LOGGED_IN'], username=session['CURR_USER'])
 	
 @app.route('/success')
 def success():
-	return render_template("success.html", logged_in=os.environ.get('LOGGED_IN'), username=os.environ.get('CURR_USER'))
+	return render_template("success.html", logged_in=session['LOGGED_IN'], username=session['CURR_USER'])
 	
 @app.route('/logout')
 def logout():
-	os.environ['CURR_USER'] = ''
-	os.environ['LOGGED_IN'] = 'NO'
+	session['CURR_USER'] = ''
+	session['LOGGED_IN'] = 'NO'
 	return redirect(url_for('index'))
 	
 @app.route('/upload', methods=['GET', 'POST'])
@@ -62,10 +62,10 @@ def upload():
 		"', '" + request.form['genre'] + "', '" + request.form['track_type'] + "', 8, 0);"
 		new_song = db.engine.execute(sql_str)
 		return redirect(url_for('songs'))
-	return render_template("upload.html", username=os.environ.get('CURR_USER'), logged_in=os.environ['LOGGED_IN'])
+	return render_template("upload.html", username=session['CURR_USER'], logged_in=session['LOGGED_IN'])
 	
 @app.route('/songs')
 def songs():
 	sql_str = "SELECT * FROM Song;"
 	all_songs = db.engine.execute(sql_str).fetchall()
-	return render_template("songs.html", username=os.environ.get('CURR_USER'), logged_in=os.environ['LOGGED_IN'], song_list=all_songs)
+	return render_template("songs.html", username=session['CURR_USER'], logged_in=session['LOGGED_IN'], song_list=all_songs)

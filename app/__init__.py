@@ -1,13 +1,16 @@
 import os
-from flask import Flask
+from flask import Flask, session
 from flask_sqlalchemy import SQLAlchemy
 
 app = Flask(__name__)
 app.config.from_object('config')
 db = SQLAlchemy(app)
 
-os.environ['CURR_USER'] = ''
-os.environ['LOGGED_IN'] = 'NO'
+app.secret_key = 'SUPER SECRET KEY'
+
+session['CURR_USER'] = ''
+session['LOGGED_IN'] = 'NO'
+
 
 # this code handles logging when running on heroku
 if not app.debug and os.environ.get('HEROKU') is None:

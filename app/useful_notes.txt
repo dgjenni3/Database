@@ -1,0 +1,6 @@
+Misc. Helpful Notes
+
+1. Use a redirect (e.g. "return redirect(url_for('url'))") to change URLs
+2. Environment variables ARE NOT SAVED across redirects
+3. To fix this problem, use the "session" object to store whatever you want in it.
+	Example: setting the current username across redirects: "session['CURR_USER'] = 'USERNAME GOES HERE'"
