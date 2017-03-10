@@ -96,3 +96,6 @@ def delete():
 		return render_template("delete.html", username=session['CURR_USER'], logged_in=session['LOGGED_IN'], error='False')
 	return render_template("delete.html", username=session['CURR_USER'], logged_in=session['LOGGED_IN'])
 	
+@app.route('/edit/<song_url>')
+def edit_song(song_url = None):
+	return "Successfully captured this song URL: '" + song_url + "'!"

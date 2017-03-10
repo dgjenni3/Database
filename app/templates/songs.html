@@ -1,9 +1,10 @@
 {% extends "base.html" %}
 {% block content %}
     <h1>Uploaded Songs</h1>
+	<h4>Click on a song to update its info</h4>
 	<div>
 	{% for songs in song_list %}
-	<p>{{ songs }}</p>
+	<a href="/edit/{{ songs[3] }}">{{ songs }}</a>
 	{% endfor %}
 	</div>
 	<a href="/upload">Upload A Song</a>
