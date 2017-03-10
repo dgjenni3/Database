@@ -29,7 +29,7 @@ def login():
 					valid = True
 					
 		if valid == True:
-			return render_template("success.html", username=request.form['username'], logged_in=True)
+			return render_template("success.html", username=curr_user, logged_in=True)
 		else:
 			return render_template("login.html", error=True, logged_in=None)
 				
@@ -47,7 +47,7 @@ def signup():
 		all_users = db.engine.execute(sql_str).fetchall()
 		curr_user = request.form['username']
 		return render_template("success.html", user_table=all_users, username=curr_user, logged_in=True)
-	return render_template("signup.html", error=error, logged_in=None, username=curr_username)
+	return render_template("signup.html", error=error, logged_in=None, username=curr_user)
 	
 @app.route('/logout')
 def logout():
