@@ -7,9 +7,9 @@
     {% endif %}
   </head>
   <body>
-    <div>On The Rise {% if logged_in %}(logged in as {{ username }}){% endif %}
+    <div>On The Rise {% if logged_in == 'YES' %}(logged in as {{ username }}){% endif %}
 	<a href="/index">Home</a>
-	{% if not logged_in %}
+	{% if logged_in == 'NO' %}
 	<a href="/login">Login</a>
 	<a href="/signup">Sign Up</a>
 	{% else %}

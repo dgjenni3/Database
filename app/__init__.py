@@ -1,3 +1,4 @@
+import os
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 
@@ -5,10 +6,8 @@ app = Flask(__name__)
 app.config.from_object('config')
 db = SQLAlchemy(app)
 
-from app import views, models
-import os
-
 os.environ['CURR_USER'] = ''
+os.environ['LOGGED_IN'] = 'NO'
 
 # this code handles logging when running on heroku
 if not app.debug and os.environ.get('HEROKU') is None:
@@ -27,3 +26,5 @@ if os.environ.get('HEROKU') is not None:
     app.logger.addHandler(stream_handler)
     app.logger.setLevel(logging.INFO)
     app.logger.info('ontherise startup')
+
+from app import views, models
