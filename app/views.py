@@ -47,10 +47,11 @@ def signup():
 		all_users = db.engine.execute(sql_str).fetchall()
 		curr_user = request.form['username']
 		return render_template("success.html", user_table=all_users, username=request.form['username'], logged_in=True)
-	return render_template("signup.html", error=error, logged_in=None)
+	return render_template("signup.html", error=error, logged_in=None, username=curr_username)
 	
 @app.route('/logout')
 def logout():
+	curr_user = ''
 	return render_template("index.html", logged_in=None)
 	
 @app.route('/upload', methods=['GET', 'POST'])
