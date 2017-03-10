@@ -84,16 +84,15 @@ def songs():
 	
 @app.route('/delete', methods=['GET', 'POST'])
 def delete():
-	error = False
 	if request.method == 'POST':
 		sql_str = "SELECT Song_Url FROM Song WHERE Song_Url='" + request.form['song_url'] + "';"
 		req_song = db.engine.execute(sql_str).fetchall()
 		if len(req_song) == 0:
 			error = True
-			return render_template("delete.html", username=session['CURR_USER'], logged_in=session['LOGGED_IN'], error=error)
+			return render_template("delete.html", username=session['CURR_USER'], logged_in=session['LOGGED_IN'], error=True)
 		
 		sql_str = "DELETE FROM Song WHERE Song_Url='" + request.form['song_url'] + "';"
 		del_song = db.engine.execute(sql_str)
-		return render_template("delete.html", username=session['CURR_USER'], logged_in=session['LOGGED_IN'], error=error)
-	return render_template("delete.html", username=session['CURR_USER'], logged_in=session['LOGGED_IN'], error=error)
+		return render_template("delete.html", username=session['CURR_USER'], logged_in=session['LOGGED_IN'], error=False)
+	return render_template("delete.html", username=session['CURR_USER'], logged_in=session['LOGGED_IN'], error=None)
 	
