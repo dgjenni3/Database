@@ -1,19 +1,16 @@
 from flask import render_template, request
 from app import app, db
-
-curr_user = ''
+import os
 
 @app.route('/')
 @app.route('/index')
 def index():
 	is_logged_in = False
-	curr_username = ''
-	if curr_user == '':
+	if os.environ.get('CURR_USER') == '':
 		is_logged_in = False
 	else:
 		is_logged_in = True
-		curr_username = curr_user
-	return render_template("index.html", logged_in=is_logged_in, username=curr_username)
+	return render_template("index.html", logged_in=is_logged_in, username=os.environ.get('CURR_USER'))
 	
 @app.route('/login', methods=['GET', 'POST'])
 def login():
@@ -29,7 +26,8 @@ def login():
 					valid = True
 					
 		if valid == True:
-			return render_template("success.html", username=curr_user, logged_in=True)
+			os.environ['CURR_USER'] = request.form['username']
+			return render_template("success.html", username=os.environ['CURR_USER'], logged_in=True)
 		else:
 			return render_template("login.html", error=True, logged_in=None)
 				
@@ -45,13 +43,13 @@ def signup():
 		create_user = db.engine.execute(sql_str)
 		sql_str = "SELECT * FROM UserTable;"
 		all_users = db.engine.execute(sql_str).fetchall()
-		curr_user = request.form['username']
-		return render_template("success.html", user_table=all_users, username=curr_user, logged_in=True)
-	return render_template("signup.html", error=error, logged_in=None, username=curr_user)
+		os.environ['CURR_USER'] = request.form['username']
+		return render_template("success.html", user_table=all_users, username=os.environ['CURR_USER'], logged_in=True)
+	return render_template("signup.html", error=error, logged_in=None, username=os.environ['CURR_USER'])
 	
 @app.route('/logout')
 def logout():
-	curr_user = ''
+	os.environ['CURR_USER'] = ''
 	return render_template("index.html", logged_in=None)
 	
 @app.route('/upload', methods=['GET', 'POST'])
@@ -63,5 +61,5 @@ def upload():
 		new_song = db.engine.execute(sql_str)
 		sql_str = "SELECT * FROM Song;"
 		all_songs = db.engine.execute(sql_str).fetchall()
-		return render_template("songs.html", username=curr_user, logged_in=True, song_list=all_songs)
-	return render_template("upload.html", username=curr_user, logged_in=True)
+		return render_template("songs.html", username=os.environ['CURR_USER'], logged_in=True, song_list=all_songs)
+	return render_template("upload.html", username=os.environ['CURR_USER'], logged_in=True)
