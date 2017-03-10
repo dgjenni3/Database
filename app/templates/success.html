@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% block content %}
+    <h1>Login Success</h1>
+	<div>
+	<p>You managed to log in as {{ username }}!</p>
+	{% for users in user_table %}
+	<p>{{ users }}</p>
+	{% endfor %}
+	</div>
+	<a href="/upload">Upload</a>
+	<a href="/songs">See All Songs</a>
+{% endblock %}

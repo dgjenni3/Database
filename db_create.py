@@ -30,7 +30,7 @@ sql_str = "CREATE TABLE Artist(" + \
 db.engine.execute(sql_str)
 
 #create the USER table
-sql_str = "CREATE TABLE User(" + \
+sql_str = "CREATE TABLE UserTable(" + \
 	"Username VARCHAR NOT NULL," + \
 	"Password VARCHAR NOT NULL," + \
 	"Email VARCHAR NOT NULL," + \

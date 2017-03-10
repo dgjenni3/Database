@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% block content %}
+    <h1>Upload</h1>
+	<div>
+	<form action="{{ url_for('upload') }}" method="post">
+	<p>Title:</p><input type="text" name="title">
+	<p>Song URL:</p><input type="text" name="song_url">
+	<p>Genre:</p><input type="text" name="genre">
+	<p>Track Type: </p>
+	<input type="radio" name="track_type" value="Song">Song<br>
+	<input type="radio" name="track_type" value="Podcast">Podcast<br>
+	<input type="radio" name="track_type" value="Lecture">Lecture<br>
+	<input type="submit" value="Upload">
+	</form>
+	</div>
+{% endblock %}

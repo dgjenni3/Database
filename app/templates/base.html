@@ -1,13 +1,21 @@
 <html>
   <head>
-    {% if title %}
-    <title>{{ title }} - microblog</title>
+    {% if logged_in == 'YES' %}
+    <title>On The Rise (logged in as {{ username }})</title>
     {% else %}
-    <title>Welcome to microblog</title>
+    <title>On The Rise</title>
     {% endif %}
   </head>
   <body>
-    <div>Microblog: <a href="/index">Home</a></div>
+    <div>On The Rise {% if logged_in == 'YES' %}(logged in as {{ username }}){% endif %}
+	<a href="/index">Home</a>
+	{% if logged_in == 'NO' %}
+	<a href="/login">Login</a>
+	<a href="/signup">Sign Up</a>
+	{% else %}
+	<a href="/logout">Log Out</a>
+	{% endif %}
+	</div>
     <hr>
     {% block content %}{% endblock %}
   </body>

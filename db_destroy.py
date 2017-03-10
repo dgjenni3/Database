@@ -13,7 +13,7 @@ db.engine.execute("DROP TABLE Song;")
 db.engine.execute("DROP TABLE Artist;")
 
 # delete the USER table
-db.engine.execute("DROP TABLE User;")
+db.engine.execute("DROP TABLE UserTable;")
 
 # delete the BY table
 db.engine.execute("DROP TABLE By;")

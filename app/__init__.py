@@ -1,13 +1,15 @@
-from flask import Flask
+import os
+from flask import Flask, session
 from flask_sqlalchemy import SQLAlchemy
 
 app = Flask(__name__)
 app.config.from_object('config')
 db = SQLAlchemy(app)
 
-from app import views, models
-import os
+app.secret_key = 'SUPER SECRET KEY'
 
+
+# this code handles logging when running on heroku
 if not app.debug and os.environ.get('HEROKU') is None:
     import logging
     from logging.handlers import RotatingFileHandler
@@ -24,3 +26,5 @@ if os.environ.get('HEROKU') is not None:
     app.logger.addHandler(stream_handler)
     app.logger.setLevel(logging.INFO)
     app.logger.info('ontherise startup')
+
+from app import views, models

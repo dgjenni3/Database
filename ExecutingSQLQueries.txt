@@ -1,4 +1,4 @@
-HOW TO EXECUTE SQL QUERIES IN PYTHON:
+HOW TO EXECUTE SQL QUERIES IN PYTHON (for selecting from a table):
 
 result = db.engine.execute("YOUR SQL QUERY GOES HERE!").fetchall()
 
@@ -7,3 +7,5 @@ YOU WILL GET A LIST OF TUPLES CONTAINING THE ATTRIBUTES YOU WANT
 After executing all the queries you want, commit the changes with:
 
 db.session.commit()
+
+(don't use fetchall when inserting)
