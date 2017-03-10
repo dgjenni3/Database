@@ -1,13 +1,17 @@
 from flask import render_template, request
 from app import app, db
 
-
+curr_user = ""
 
 @app.route('/')
 @app.route('/index')
 def index():
-    username = 'TEST_USERNAME'
-    return render_template("index.html", logged_in=None, username=username)
+    if curr_user == '':
+		logged_in = None
+	else:
+		logged_in = True
+		username = curr_user
+    return render_template("index.html", logged_in=logged_in, username=curr_user)
 	
 @app.route('/login', methods=['GET', 'POST'])
 def login():
@@ -39,9 +43,21 @@ def signup():
 		create_user = db.engine.execute(sql_str)
 		sql_str = "SELECT * FROM UserTable;"
 		all_users = db.engine.execute(sql_str).fetchall()
+		curr_user = request.form['username']
 		return render_template("success.html", user_table=all_users, username=request.form['username'], logged_in=True)
 	return render_template("signup.html", error=error, logged_in=None)
 	
 @app.route('/logout')
 def logout():
 	return render_template("index.html", logged_in=None)
+	
+@app.route('/upload', methods=['GET', 'POST'])
+def upload():
+	if request.method == 'POST':
+		sql_str = "INSERT INTO Song(Title, Created_at, Soundcloud_Views, Song_Url, Genre, Track_type, Duration, " + \ "Soundcloud_Favorites) VALUES('" + request.form['title'] + "', 1234, 0, '" + request.form['song_url'] + \
+		"', '" + request.form['genre'] + "', '" + request.form['track_type'] + "', 8, 0);"
+		new_song = db.engine.execute(sql_str)
+		sql_str = "SELECT * FROM Song;"
+		all_songs = db.engine.execute(sql_str).fetchall()
+		return render_template("songs.html", username=curr_user, logged_in=True, song_list=all_songs)
+	return render_template("upload.html", username=curr_user, logged_in=True)
