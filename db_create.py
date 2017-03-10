@@ -56,7 +56,7 @@ sql_str = "CREATE TABLE Playlist(" + \
 	"Name VARCHAR NOT NULL," + \
 	"Email VARCHAR NOT NULL," + \
 	"Song_Url VARCHAR NOT NULL," + \
-	"PRIMARY KEY (Name));"
+	"PRIMARY KEY (Name, Email));"
 db.engine.execute(sql_str)
 
 # commit the results to keep them

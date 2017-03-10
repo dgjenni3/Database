@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% block content %}
+    <h1>Edit Song</h1>
+	{% if not error %}
+	<div>
+	<form action="{{ url_for('edit') }}" method="post">
+	<p>Title:</p><input type="text" name="title" value="{{ song_title }}">
+	<p>Genre:</p><input type="text" name="genre" value="{{ genre }}">
+	<p>Song URL:</p><input type="text" name="song_url", value="{{ song_url }}" readonly="readonly">
+	<p>Track Type: </p>
+	<input type="radio" name="track_type" value="Song" {% if track_type == 'Song' %}checked="True"{% endif %}>Song<br>
+	<input type="radio" name="track_type" value="Podcast" {% if track_type == 'Podcast' %}checked="True"{% endif %}>Podcast<br>
+	<input type="radio" name="track_type" value="Lecture" {% if track_type == 'Lecture' %}checked="True"{% endif %}>Lecture<br>
+	<input type="submit" value="Edit">
+	</form>
+	</div>
+	{% endif %}
+	{% if not error %}
+	<h5>Change the values above to modify the song's attributes.</h5>
+	{% elif error == 'True' %}
+	<h5>Error - a song with that URL already exists in our database!</h5>
+	{% elif error == 'False' %}
+	<h5>Song updated successfully!</h5>
+	{% endif %}
+	<a href="/upload">Upload A Song</a>
+	<a href="/songs">See All Songs</a>
+	<a href="/delete">Delete A Song</a>
+{% endblock %}
