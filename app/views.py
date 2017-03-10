@@ -47,7 +47,8 @@ def signup():
 		if len(req_email) != 0:
 			error = True
 		hashed_pass = hashlib.sha256(request.form['password'] + "SALT").hexdigest()
-		sql_str = "INSERT INTO UserTable(Username, Password, Email, Artist_Url) VALUES ('" + request.form['username'] + "', '" + \ hashed_pass + "', '" + request.form['email'] + "', '" + request.form['username'] + "');"
+		sql_str = "INSERT INTO UserTable(Username, Password, Email, Artist_Url) VALUES ('" + request.form['username'] + "', '" + \
+		hashed_pass + "', '" + request.form['email'] + "', '" + request.form['username'] + "');"
 		create_user = db.engine.execute(sql_str)
 		session['CURR_USER'] = request.form['username']
 		session['LOGGED_IN'] = 'YES'
