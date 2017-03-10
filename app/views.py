@@ -46,8 +46,8 @@ def signup():
 		create_user = db.engine.execute(sql_str)
 		sql_str = "SELECT * FROM UserTable;"
 		all_users = db.engine.execute(sql_str).fetchall()
-		os.environ['CURR_USER'] = request.form['username']
-		os.environ['LOGGED_IN'] = 'YES'
+		session['CURR_USER'] = request.form['username']
+		session['LOGGED_IN'] = 'YES'
 		return redirect(url_for('success'))
 	return render_template("signup.html", error=error, logged_in=session['LOGGED_IN'], username=session['CURR_USER'])
 	
