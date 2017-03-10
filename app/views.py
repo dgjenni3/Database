@@ -11,7 +11,7 @@ def index():
 	else:
 		is_logged_in = True
 		curr_username = curr_user
-    return render_template("index.html", logged_in=is_logged_in, username=curr_username)
+	return render_template("index.html", logged_in=is_logged_in, username=curr_username)
 	
 @app.route('/login', methods=['GET', 'POST'])
 def login():
