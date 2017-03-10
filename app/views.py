@@ -81,3 +81,32 @@ def songs():
 	sql_str = "SELECT * FROM Song;"
 	all_songs = db.engine.execute(sql_str).fetchall()
 	return render_template("songs.html", username=session['CURR_USER'], logged_in=session['LOGGED_IN'], song_list=all_songs)
+	
+@app.route('/delete', methods=['GET', 'POST'])
+def delete():
+	if request.method == 'POST':
+		sql_str = "SELECT Song_Url FROM Song WHERE Song_Url='" + request.form['song_url'] + "';"
+		req_song = db.engine.execute(sql_str).fetchall()
+		if len(req_song) == 0:
+			error = True
+			return render_template("delete.html", username=session['CURR_USER'], logged_in=session['LOGGED_IN'], error='True')
+		
+		sql_str = "DELETE FROM Song WHERE Song_Url='" + request.form['song_url'] + "';"
+		del_song = db.engine.execute(sql_str)
+		return render_template("delete.html", username=session['CURR_USER'], logged_in=session['LOGGED_IN'], error='False')
+	return render_template("delete.html", username=session['CURR_USER'], logged_in=session['LOGGED_IN'])
+	
+@app.route('/edit/<path:song_url>', methods=['GET', 'POST'])
+def song_edit(song_url):
+	if request.method == 'POST':
+		sql_str = "UPDATE Song SET Title='" + request.form['title'] + "', " + "Genre='" + request.form['genre'] + \
+		"', Track_type='" + request.form['track_type'] + "' WHERE Song_Url='" + song_url + "';"
+		updated_song = db.engine.execute(sql_str)
+		return render_template("edit.html", error='False')
+	elif request.method == 'GET':
+		sql_str = "SELECT * FROM Song WHERE Song_Url='" + song_url + "';"
+		req_song = db.engine.execute(sql_str).fetchall()
+		song_title = req_song[0][0]
+		genre = req_song[0][4]
+		track_type = req_song[0][5]
+		return render_template("edit.html", username=session['CURR_USER'], logged_in=session['LOGGED_IN'], song_title=song_title, song_url=song_url, genre=genre, track_type=track_type)

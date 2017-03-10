@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% block content %}
+    <h1>Delete Song</h1>
+	<div>
+	<form action="{{ url_for('delete') }}" method="post">
+	<p>URL:</p> <input type="text" name="song_url">
+	<input type="submit" value="Delete Song">
+	</form>
+	<div>
+	<div>
+	{% if not error %}
+	<h5>Enter the URL of the song you want to delete in the field above.</h5>
+	{% elif error == 'True' %}
+	<h5>Error - There is no song corresponding to that URL!</h5>
+	{% elif error == 'False' %}
+	<h5>Song deleted successfully!</h5>
+	{% endif %}
+	</div>
+	<a href="/songs">See All Songs</a>
+{% endblock %}
