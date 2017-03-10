@@ -8,6 +8,8 @@ db = SQLAlchemy(app)
 from app import views, models
 import os
 
+os.environ['CURR_USER'] = ''
+
 # this code handles logging when running on heroku
 if not app.debug and os.environ.get('HEROKU') is None:
     import logging
