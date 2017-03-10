@@ -4,8 +4,8 @@ import os
 
 @app.before_request
 def initSession():
-	if session.get('USERNAME') is None:
-		session['USERNAME'] = ''
+	if session.get('CURR_USER') is None:
+		session['CURR_USER'] = ''
 	if session.get('LOGGED_IN') is None:
 		session['LOGGED_IN'] = 'NO'
 
