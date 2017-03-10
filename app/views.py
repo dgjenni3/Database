@@ -6,12 +6,12 @@ curr_user = ''
 @app.route('/')
 @app.route('/index')
 def index():
-    if curr_user == '':
-		logged_in = None
+	if curr_user == '':
+		is_logged_in = None
 	else:
-		logged_in = True
-		username = curr_user
-    return render_template("index.html", logged_in=logged_in, username=username)
+		is_logged_in = True
+		curr_username = curr_user
+    return render_template("index.html", logged_in=is_logged_in, username=curr_username)
 	
 @app.route('/login', methods=['GET', 'POST'])
 def login():
