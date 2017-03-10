@@ -41,3 +41,7 @@ def signup():
 		all_users = db.engine.execute(sql_str).fetchall()
 		return render_template("success.html", user_table=all_users, username=request.form['username'], logged_in=True)
 	return render_template("signup.html", error=error, logged_in=None)
+	
+@app.rout('/logout')
+def logout():
+	return render_template("index.html", logged_in=None)
