@@ -54,7 +54,8 @@ def logout():
 @app.route('/upload', methods=['GET', 'POST'])
 def upload():
 	if request.method == 'POST':
-		sql_str = "INSERT INTO Song(Title, Created_at, Soundcloud_Views, Song_Url, Genre, Track_type, Duration, " + \ "Soundcloud_Favorites) VALUES('" + request.form['title'] + "', 1234, 0, '" + request.form['song_url'] + \
+		sql_str = "INSERT INTO Song(Title, Created_at, Soundcloud_Views, Song_Url, Genre, Track_type, Duration, " + \
+		"Soundcloud_Favorites) VALUES('" + request.form['title'] + "', 1234, 0, '" + request.form['song_url'] + \ 
 		"', '" + request.form['genre'] + "', '" + request.form['track_type'] + "', 8, 0);"
 		new_song = db.engine.execute(sql_str)
 		sql_str = "SELECT * FROM Song;"
