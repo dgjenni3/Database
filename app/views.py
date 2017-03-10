@@ -1,6 +1,6 @@
 from flask import render_template, request, redirect, url_for, session
 from app import app, db
-import os
+import os, hashlib
 
 @app.before_request
 def initSession():
@@ -19,7 +19,8 @@ def login():
 	if request.method == 'POST':
 		sql_str = "SELECT Username FROM UserTable WHERE Username='" + request.form['username'] + "';"
 		req_user = db.engine.execute(sql_str).fetchall()
-		sql_str = "SELECT Password FROM UserTable WHERE Password='" + request.form['password'] + "';"
+		hashed_pass = hashlib.sha256(request.form['password'] + "SALT").hexdigest()
+		sql_str = "SELECT Password FROM UserTable WHERE Password='" + hashed_pass + "';"
 		req_pass = db.engine.execute(sql_str).fetchall()
 		valid = False
 		if len(req_user) == 1 and len(req_pass) == 1:
@@ -41,14 +42,17 @@ def login():
 def signup():
 	error = False
 	if request.method == 'POST':
-		sql_str = "INSERT INTO UserTable(Username, Password, Email, Artist_Url) VALUES ('" + request.form['username'] + "', '" + request.form['password'] + \
-		"', '" + request.form['email'] + "', '" + request.form['username'] + "');"
+		sql_str = "SELECT Email FROM UserTable WHERE Email='" + request.form['email'] + "';"
+		req_email = db.engine.execute(sql_str).fetchall()
+		if len(req_email) != 0:
+			error = True
+		hashed_pass = hashlib.sha256(request.form['password'] + "SALT").hexdigest()
+		sql_str = "INSERT INTO UserTable(Username, Password, Email, Artist_Url) VALUES ('" + request.form['username'] + "', '" + \ hashed_pass + "', '" + request.form['email'] + "', '" + request.form['username'] + "');"
 		create_user = db.engine.execute(sql_str)
-		sql_str = "SELECT * FROM UserTable;"
-		all_users = db.engine.execute(sql_str).fetchall()
 		session['CURR_USER'] = request.form['username']
 		session['LOGGED_IN'] = 'YES'
-		return redirect(url_for('success'))
+		if error == False:
+			return redirect(url_for('success'))
 	return render_template("signup.html", error=error, logged_in=session['LOGGED_IN'], username=session['CURR_USER'])
 	
 @app.route('/success')
