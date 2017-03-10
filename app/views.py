@@ -27,7 +27,7 @@ def login():
 					
 		if valid == True:
 			os.environ['CURR_USER'] = request.form['username']
-			return render_template("success.html", username=os.environ['CURR_USER'], logged_in=True)
+			return render_template("success.html", username=os.environ.get('CURR_USER'), logged_in=True)
 		else:
 			return render_template("login.html", error=True, logged_in=None)
 				
@@ -44,8 +44,8 @@ def signup():
 		sql_str = "SELECT * FROM UserTable;"
 		all_users = db.engine.execute(sql_str).fetchall()
 		os.environ['CURR_USER'] = request.form['username']
-		return render_template("success.html", user_table=all_users, username=os.environ['CURR_USER'], logged_in=True)
-	return render_template("signup.html", error=error, logged_in=None, username=os.environ['CURR_USER'])
+		return render_template("success.html", user_table=all_users, username=os.environ.get('CURR_USER'), logged_in=True)
+	return render_template("signup.html", error=error, logged_in=None, username=os.environ.get('CURR_USER'))
 	
 @app.route('/logout')
 def logout():
@@ -61,5 +61,5 @@ def upload():
 		new_song = db.engine.execute(sql_str)
 		sql_str = "SELECT * FROM Song;"
 		all_songs = db.engine.execute(sql_str).fetchall()
-		return render_template("songs.html", username=os.environ['CURR_USER'], logged_in=True, song_list=all_songs)
-	return render_template("upload.html", username=os.environ['CURR_USER'], logged_in=True)
+		return render_template("songs.html", username=os.environ.get('CURR_USER'), logged_in=True, song_list=all_songs)
+	return render_template("upload.html", username=os.environ.get('CURR_USER'), logged_in=True)
