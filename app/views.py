@@ -29,7 +29,7 @@ def login():
 					valid = True
 					
 		if valid == True:
-			session['CURR_USER'] = req_email[0][1]
+			session['CURR_USER'] = req_email[0][0]
 			session['LOGGED_IN'] = 'YES'
 			return redirect(url_for('success'))
 		else:
