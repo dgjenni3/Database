@@ -2,13 +2,13 @@
 from migrate.versioning import api
 #from config import SQLALCHEMY_DATABASE_URI
 #from config import SQLALCHEMY_MIGRATE_REPO
-from app import app, conn
+from app import app, conn, m_data
 import os.path
 # this python file creates all the database tables that will be used by the application
 # DO NOT RUN THIS FILE MORE THAN ONCE --- you only need to create the tables once!
 
 # try to delete all the tables
-conn.drop_all()
+m_data.drop_all()
 
 #create the SONG table
 sql_str = "CREATE TABLE Song(" + \
@@ -45,7 +45,7 @@ conn.execute(sql_str)
 		"Album_Name VARCHAR NOT NULL," + \
 		"Artist_Url VARCHAR NOT NULL," + \
 		"Song_Url VARCHAR NOT NULL);"
-	db.engine.execute(sql_str)
+	conn.execute(sql_str)
 
 #create the UPVOTE table
 	sql_str = "CREATE TABLE Upvote(" + \
@@ -61,8 +61,8 @@ conn.execute(sql_str)
 		"PRIMARY KEY (Name, Email, Song_Url));"
 	conn.execute(sql_str)
 
-# commit the results to keep them
-# db.session.commit()
+ commit the results to keep them
+ conn.commit()
 # if not os.path.exists(SQLALCHEMY_MIGRATE_REPO):
     # api.create(SQLALCHEMY_MIGRATE_REPO, 'database repository')
     # api.version_control(SQLALCHEMY_DATABASE_URI, SQLALCHEMY_MIGRATE_REPO)
