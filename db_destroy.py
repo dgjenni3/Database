@@ -24,6 +24,9 @@ db.engine.execute("DROP TABLE Upvote;")
 # delete the PLAYLIST table
 db.engine.execute("DROP TABLE Playlist;")
 
+# delete the USERS_PLAYLISTS table
+db.engine.execute("DROP TABLE UsersPlaylists;")
+
 # commit the results to keep them
 db.session.commit()
 if not os.path.exists(SQLALCHEMY_MIGRATE_REPO):
