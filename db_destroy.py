@@ -6,6 +6,9 @@ from app import db
 import os.path
 # this python file deletes all the database tables that will be used by the application
 # DO NOT RUN THIS FILE MORE THAN ONCE --- you only need to delete the tables once!
+
+db.delete_all()
+
 # delete the SONG table
 if db.engine.dialect.has_table(db.engine, "Song"):
 	db.engine.execute("DROP TABLE Song;")

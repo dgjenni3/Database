@@ -7,7 +7,8 @@ import os.path
 # this python file creates all the database tables that will be used by the application
 # DO NOT RUN THIS FILE MORE THAN ONCE --- you only need to create the tables once!
 
-db.create_all()
+db.drop_all()
+
 #create the SONG table
 if not db.engine.dialect.has_table(db.engine, "Song"):
 	sql_str = "CREATE TABLE Song(" + \
