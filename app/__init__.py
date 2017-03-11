@@ -1,12 +1,15 @@
 import os
 from flask import Flask, session
-from flask_sqlalchemy import SQLAlchemy
+from config import SQLALCHEMY_DATABASE_URI
+from sqlalchemy import create_engine, MetaData
 
 app = Flask(__name__)
 app.config.from_object('config')
-db = SQLAlchemy(app)
 
-app.secret_key = 'SUPER SECRET KEY'
+con = create_engine(SQLALCHEMY_DATABASE_URI)
+m_data = MetaData(bind=con, reflect=True)
+
+app.secret_key = binascii.hexlify(os.urandom(24))
 
 
 # this code handles logging when running on heroku
