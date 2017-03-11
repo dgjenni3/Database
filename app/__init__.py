@@ -11,7 +11,7 @@ conn = create_engine(SQLALCHEMY_DATABASE_URI)
 
 # creates an SQLAlchemy MetaData object that stores all information about the currently existing tables
 # in the database (reflect=True means it automatically grabs this information from the database)
-m_data = MetaData(bind=con, reflect=True)
+m_data = MetaData(bind=conn, reflect=True)
 
 app.secret_key = binascii.hexlify(os.urandom(24))
 
