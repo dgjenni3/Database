@@ -24,45 +24,45 @@ sql_str = "CREATE TABLE Song(" + \
 conn.execute(sql_str)
 
 #create the ARTIST table
-	sql_str = "CREATE TABLE Artist(" + \
-		"Name VARCHAR NOT NULL," + \
-		"Artist_Url VARCHAR NOT NULL," + \
-		"Number_Followers INT NOT NULL," + \
-		"PRIMARY KEY (Artist_Url));"
-	conn.execute(sql_str)
+sql_str = "CREATE TABLE Artist(" + \
+	"Name VARCHAR NOT NULL," + \
+	"Artist_Url VARCHAR NOT NULL," + \
+	"Number_Followers INT NOT NULL," + \
+	"PRIMARY KEY (Artist_Url));"
+conn.execute(sql_str)
 
 #create the USER table
-	sql_str = "CREATE TABLE UserTable(" + \
-		"Username VARCHAR NOT NULL," + \
-		"Password VARCHAR NOT NULL," + \
-		"Email VARCHAR NOT NULL," + \
-		"Artist_Url VARCHAR NOT NULL," + \
-		"PRIMARY KEY (Email));"
-	conn.execute(sql_str)
+sql_str = "CREATE TABLE UserTable(" + \
+	"Username VARCHAR NOT NULL," + \
+	"Password VARCHAR NOT NULL," + \
+	"Email VARCHAR NOT NULL," + \
+	"Artist_Url VARCHAR NOT NULL," + \
+	"PRIMARY KEY (Email));"
+conn.execute(sql_str)
 
 #create the BY table
-	sql_str = "CREATE TABLE By(" + \
-		"Album_Name VARCHAR NOT NULL," + \
-		"Artist_Url VARCHAR NOT NULL," + \
-		"Song_Url VARCHAR NOT NULL);"
-	conn.execute(sql_str)
+sql_str = "CREATE TABLE By(" + \
+	"Album_Name VARCHAR NOT NULL," + \
+	"Artist_Url VARCHAR NOT NULL," + \
+	"Song_Url VARCHAR NOT NULL);"
+conn.execute(sql_str)
 
 #create the UPVOTE table
-	sql_str = "CREATE TABLE Upvote(" + \
-		"Email VARCHAR NOT NULL," + \
-		"Song_Url VARCHAR NOT NULL);"
-	conn.execute(sql_str)
+sql_str = "CREATE TABLE Upvote(" + \
+	"Email VARCHAR NOT NULL," + \
+	"Song_Url VARCHAR NOT NULL);"
+conn.execute(sql_str)
 
 #create the PLAYLIST table
-	sql_str = "CREATE TABLE Playlist(" + \
-		"Name VARCHAR NOT NULL," + \
-		"Email VARCHAR NOT NULL," + \
-		"Song_Url VARCHAR NOT NULL," + \
-		"PRIMARY KEY (Name, Email, Song_Url));"
-	conn.execute(sql_str)
+sql_str = "CREATE TABLE Playlist(" + \
+	"Name VARCHAR NOT NULL," + \
+	"Email VARCHAR NOT NULL," + \
+	"Song_Url VARCHAR NOT NULL," + \
+	"PRIMARY KEY (Name, Email, Song_Url));"
+conn.execute(sql_str)
 
- commit the results to keep them
- conn.commit()
+# commit the results to keep them
+# conn.commit()
 # if not os.path.exists(SQLALCHEMY_MIGRATE_REPO):
     # api.create(SQLALCHEMY_MIGRATE_REPO, 'database repository')
     # api.version_control(SQLALCHEMY_DATABASE_URI, SQLALCHEMY_MIGRATE_REPO)
