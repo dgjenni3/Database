@@ -1,12 +1,19 @@
-import os
+import os, binascii
 from flask import Flask, session
-from flask_sqlalchemy import SQLAlchemy
+from config import SQLALCHEMY_DATABASE_URI
+from sqlalchemy import create_engine, MetaData
 
 app = Flask(__name__)
 app.config.from_object('config')
-db = SQLAlchemy(app)
 
-app.secret_key = 'SUPER SECRET KEY'
+# create the SQLAlchemy Engine object that establishes a connection to the specified URL in config.py
+conn = create_engine(SQLALCHEMY_DATABASE_URI)
+
+# creates an SQLAlchemy MetaData object that stores all information about the currently existing tables
+# in the database (reflect=True means it automatically grabs this information from the database)
+m_data = MetaData(bind=conn, reflect=True)
+
+app.secret_key = binascii.hexlify(os.urandom(24))
 
 
 # this code handles logging when running on heroku
