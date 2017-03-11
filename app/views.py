@@ -17,14 +17,14 @@ def index():
 @app.route('/login', methods=['GET', 'POST'])
 def login():
 	if request.method == 'POST':
-		sql_str = "SELECT Username FROM UserTable WHERE Username='" + request.form['username'] + "';"
-		req_user = conn.execute(sql_str).fetchall()
+		sql_str = "SELECT Email FROM UserTable WHERE Username='" + request.form['email'] + "';"
+		req_email = conn.execute(sql_str).fetchall()
 		hashed_pass = hashlib.sha256(request.form['password'] + "SALT").hexdigest()
 		sql_str = "SELECT Password FROM UserTable WHERE Password='" + hashed_pass + "';"
 		req_pass = conn.execute(sql_str).fetchall()
 		valid = False
-		if len(req_user) == 1 and len(req_pass) == 1:
-			if str(req_user[0][0]) == request.form['username']:
+		if len(req_email) == 1 and len(req_pass) == 1:
+			if str(req_email[0][0]) == request.form['email']:
 				if str(req_pass[0][0]) == hashed_pass:
 					valid = True
 					
