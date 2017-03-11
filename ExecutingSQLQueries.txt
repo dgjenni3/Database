@@ -1,11 +1,11 @@
 HOW TO EXECUTE SQL QUERIES IN PYTHON (for selecting from a table):
 
-result = db.engine.execute("YOUR SQL QUERY GOES HERE!").fetchall()
+result = conn.execute("YOUR SQL QUERY GOES HERE!").fetchall()
+
+conn represents an Engine variable created in __init__.py
+an Engine is SQLAlchemy's way of establishing a connection with the database URL
+The database URL is specified in config.py
 
 YOU WILL GET A LIST OF TUPLES CONTAINING THE ATTRIBUTES YOU WANT
 
-After executing all the queries you want, commit the changes with:
-
-db.session.commit()
-
-(don't use fetchall when inserting)
+(don't use fetchall when inserting, deleting, etc.)
