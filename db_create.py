@@ -59,13 +59,6 @@ sql_str = "CREATE TABLE Playlist(" + \
 	"PRIMARY KEY (Name, Email, Song_Url));"
 db.engine.execute(sql_str)
 
-#create the USERS_PLAYLISTS
-sql_str = "CREATE TABLE UsersPlayLists(" + \
-	"Email VARCHAR NOT NULL," + \
-	"Name VARCHAR NOT NULL," + \
-	"PRIMARY KEY (Email, Name));"
-db.engine.execute(sql_str)
-
 # commit the results to keep them
 db.session.commit()
 if not os.path.exists(SQLALCHEMY_MIGRATE_REPO):
