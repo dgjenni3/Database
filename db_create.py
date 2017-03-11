@@ -2,12 +2,12 @@
 from migrate.versioning import api
 from config import SQLALCHEMY_DATABASE_URI
 from config import SQLALCHEMY_MIGRATE_REPO
-from app import db
+from app import app, db
 import os.path
 # this python file creates all the database tables that will be used by the application
 # DO NOT RUN THIS FILE MORE THAN ONCE --- you only need to create the tables once!
 
-db.drop_all()
+db.drop_all(app=app)
 
 #create the SONG table
 if not db.engine.dialect.has_table(db.engine, "Song"):
