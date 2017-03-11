@@ -7,22 +7,28 @@ import os.path
 # this python file deletes all the database tables that will be used by the application
 # DO NOT RUN THIS FILE MORE THAN ONCE --- you only need to delete the tables once!
 # delete the SONG table
-db.engine.execute("DROP TABLE Song;")
+if db.engine.dialect.has_table(db.engine, "Song"):
+	db.engine.execute("DROP TABLE Song;")
 
 # delete the ARTIST table
-db.engine.execute("DROP TABLE Artist;")
+if not db.engine.dialect.has_table(db.engine, "Artist"):
+	db.engine.execute("DROP TABLE Artist;")
 
 # delete the USER table
-db.engine.execute("DROP TABLE UserTable;")
+if not db.engine.dialect.has_table(db.engine, "UserTable"):
+	db.engine.execute("DROP TABLE UserTable;")
 
 # delete the BY table
-db.engine.execute("DROP TABLE By;")
+if not db.engine.dialect.has_table(db.engine, "By"):
+	db.engine.execute("DROP TABLE By;")
 
 # delete the UPVOTE table
-db.engine.execute("DROP TABLE Upvote;")
+if not db.engine.dialect.has_table(db.engine, "Upvote"):
+	db.engine.execute("DROP TABLE Upvote;")
 
 # delete the PLAYLIST table
-db.engine.execute("DROP TABLE Playlist;")
+if not db.engine.dialect.has_table(db.engine, "Playlist"):
+	db.engine.execute("DROP TABLE Playlist;")
 
 # commit the results to keep them
 db.session.commit()
